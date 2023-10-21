@@ -7,6 +7,7 @@ import android.graphics.ColorSpace.Rgb
 import android.graphics.Paint
 import android.os.Bundle
 import android.text.InputType
+import android.text.style.ForegroundColorSpan
 import android.util.Log
 import android.widget.AdapterView.OnItemLongClickListener
 import android.widget.ArrayAdapter
@@ -68,15 +69,21 @@ class MainActivity : AppCompatActivity() {
         fab.setColorFilter(colorBlue)
         fab.setOnClickListener{
 
-
             val builder = AlertDialog.Builder(this)
-            builder.setTitle("Add")
+            builder.setTitle("Add task")
+                .setIcon(android.R.drawable.ic_input_add)
+            //builder.setTitle
 
             val inputField = EditText(this)
 
             inputField.hint = "Type task in here"
             inputField.inputType = InputType.TYPE_CLASS_TEXT
+            inputField.setTextColor(colorGreen)
             builder.setView(inputField)
+
+            if (inputField.text.isEmpty()) {
+                items.remove(inputField.text.toString())
+            }
 
             builder.setPositiveButton("OK") { _, _ ->
                 items.add(inputField.text.toString())
@@ -85,6 +92,7 @@ class MainActivity : AppCompatActivity() {
             builder.setNegativeButton("Cancel") { _, _ ->
                 //Toast.makeText(applicationContext, "Successfully cancelled!", Toast.LENGTH_SHORT).show()
             }
+
             builder.show()
         }
 

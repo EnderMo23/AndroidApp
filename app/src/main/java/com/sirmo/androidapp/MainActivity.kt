@@ -57,7 +57,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         fab.rippleColor = Color.GREEN
-        fab.setBackgroundColor(Color.RED)
+        fab.setBackgroundColor(Color.rgb(39, 158, 255))
         fab.setColorFilter(Color.RED)
         fab.setOnClickListener{
 

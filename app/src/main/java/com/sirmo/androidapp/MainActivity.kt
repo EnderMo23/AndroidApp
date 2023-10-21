@@ -1,5 +1,6 @@
 package com.sirmo.androidapp
 
+import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.graphics.Color
 import android.graphics.ColorSpace.Rgb
@@ -14,6 +15,7 @@ import android.widget.ListView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.sirmo.androidapp.databinding.ActivityMainBinding
@@ -32,6 +34,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var itemAdapter: ArrayAdapter<String>
     private lateinit var mTitle: TextView
 
+
+    @SuppressLint("ResourceType")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -55,17 +59,20 @@ class MainActivity : AppCompatActivity() {
 
             true
         }
+        val colorGreen = Color.parseColor(getString(R.color.green))
+        val colorGreenDark = Color.parseColor(getString(R.color.green_dark))
+        val colorBlue = Color.parseColor(getString(R.color.blue))
 
-        fab.rippleColor = Color.GREEN
-        fab.setBackgroundColor(Color.rgb(39, 158, 255))
-        fab.setColorFilter(Color.RED)
+        fab.rippleColor = colorGreen
+        //fab.setColorFilter(Color.rgb(39, 158, 255))
+        fab.setColorFilter(colorBlue)
         fab.setOnClickListener{
 
 
-            var builder = AlertDialog.Builder(this)
+            val builder = AlertDialog.Builder(this)
             builder.setTitle("Add")
 
-            var inputField = EditText(this)
+            val inputField = EditText(this)
 
             inputField.hint = "Type task in here"
             inputField.inputType = InputType.TYPE_CLASS_TEXT
@@ -84,10 +91,10 @@ class MainActivity : AppCompatActivity() {
         //materialToolbar2.setTitleTextColor(Color.WHITE)
 
         textView.paintFlags = Paint.UNDERLINE_TEXT_FLAG
-        textView.setTextColor(Color.rgb(63,81,181))
+        textView.setTextColor(colorGreenDark)
 
         textViewHeading.paintFlags = Paint.UNDERLINE_TEXT_FLAG
-        textViewHeading.setTextColor(Color.rgb(63,81,181))
+        textViewHeading.setTextColor(colorGreen)
 
 
     }

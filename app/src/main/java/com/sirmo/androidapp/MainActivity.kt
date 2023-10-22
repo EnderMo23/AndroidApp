@@ -105,6 +105,7 @@ class MainActivity : AppCompatActivity() {
         textViewHeading.setTextColor(colorGreen)
 
 
+
     }
 }
 

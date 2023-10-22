@@ -56,7 +56,7 @@ class MainActivity : AppCompatActivity() {
         lvToDoList.onItemLongClickListener = OnItemLongClickListener { _, _, pos, _ ->
             items.removeAt(pos)
             itemAdapter.notifyDataSetChanged()
-            //Toast.makeText(applicationContext, "Element successfully deleted!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(applicationContext, "Element successfully deleted!", Toast.LENGTH_SHORT).show()
 
             true
         }
@@ -83,14 +83,16 @@ class MainActivity : AppCompatActivity() {
 
             if (inputField.text.isEmpty()) {
                 items.remove(inputField.text.toString())
+                //Toast.makeText(applicationContext, "Please enter a task!", Toast.LENGTH_SHORT).show()
             }
 
             builder.setPositiveButton("OK") { _, _ ->
                 items.add(inputField.text.toString())
+                //Toast.makeText(applicationContext, "Task successfully added with the name ${inputField.text}" + "!", Toast.LENGTH_SHORT).show()
             }
 
             builder.setNegativeButton("Cancel") { _, _ ->
-                //Toast.makeText(applicationContext, "Successfully cancelled!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(applicationContext, "Successfully cancelled!", Toast.LENGTH_SHORT).show()
             }
 
             builder.show()

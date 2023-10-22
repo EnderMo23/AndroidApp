@@ -88,7 +88,7 @@ class MainActivity : AppCompatActivity() {
 
             builder.setPositiveButton("OK") { _, _ ->
                 items.add(inputField.text.toString())
-                Toast.makeText(applicationContext, "Task successfully added with the name ${inputField.text}" + "!", Toast.LENGTH_SHORT).show()
+                //Toast.makeText(applicationContext, "Task successfully added with the name ${inputField.text}" + "!", Toast.LENGTH_SHORT).show()
             }
 
             builder.setNegativeButton("Cancel") { _, _ ->

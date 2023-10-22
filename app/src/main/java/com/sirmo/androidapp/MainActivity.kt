@@ -2,9 +2,11 @@ package com.sirmo.androidapp
 
 import android.annotation.SuppressLint
 import android.app.AlertDialog
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.ColorSpace.Rgb
 import android.graphics.Paint
+import android.net.Uri
 import android.os.Bundle
 import android.text.InputType
 import android.text.style.ForegroundColorSpan
@@ -12,6 +14,7 @@ import android.util.Log
 import android.widget.AdapterView.OnItemLongClickListener
 import android.widget.ArrayAdapter
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.ListView
 import android.widget.TextView
 import android.widget.Toast
@@ -31,6 +34,7 @@ class MainActivity : AppCompatActivity() {
     //private lateinit var materialToolbar2: MaterialToolbar
     private lateinit var textView: TextView
     private lateinit var textViewHeading: TextView
+    private lateinit var imageView: ImageView
     private lateinit var items: ArrayList<String>
     private lateinit var itemAdapter: ArrayAdapter<String>
     private lateinit var mTitle: TextView
@@ -42,13 +46,14 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        imageView = findViewById(R.id.imageView2)
+        textView = findViewById(R.id.textView)
+        textViewHeading = findViewById(R.id.textView2)
         lvToDoList = findViewById(R.id.lvToDoList)
         fab = findViewById(R.id.floatingActionButton2)
         items = ArrayList()
         //materialToolbar = findViewById(R.id.materialToolbar)
         //materialToolbar2 = findViewById(R.id.materialToolbar2)
-        textView = findViewById(R.id.textView)
-        textViewHeading = findViewById(R.id.textView2)
 
         itemAdapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, items)
         lvToDoList.adapter = itemAdapter
@@ -63,6 +68,13 @@ class MainActivity : AppCompatActivity() {
         val colorGreen = Color.parseColor(getString(R.color.green))
         val colorGreenDark = Color.parseColor(getString(R.color.green_dark))
         val colorBlue = Color.parseColor(getString(R.color.blue))
+        val colorWhiteLight = Color.parseColor(getString(R.color.white_light))
+
+        //imageView.setImageResource(R.drawable.ic_launcher_background)
+        imageView.setOnClickListener{
+            val i2 = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/watch?v=dQw4w9WgXcQ"))
+            startActivity(i2)
+        }
 
         fab.rippleColor = colorGreen
         //fab.setColorFilter(Color.rgb(39, 158, 255))
@@ -101,12 +113,10 @@ class MainActivity : AppCompatActivity() {
         //materialToolbar2.setTitleTextColor(Color.WHITE)
 
         textView.paintFlags = Paint.UNDERLINE_TEXT_FLAG
-        textView.setTextColor(colorGreenDark)
+        textView.setTextColor(Color.WHITE) //colorGreenDark
 
         textViewHeading.paintFlags = Paint.UNDERLINE_TEXT_FLAG
-        textViewHeading.setTextColor(colorGreen)
-
-
+        textViewHeading.setTextColor(colorWhiteLight) //colorGreen
 
     }
 }

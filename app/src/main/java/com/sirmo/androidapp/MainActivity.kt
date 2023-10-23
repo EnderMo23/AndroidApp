@@ -2,7 +2,9 @@ package com.sirmo.androidapp
 
 import android.annotation.SuppressLint
 import android.app.AlertDialog
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.graphics.Color
 import android.graphics.ColorSpace.Rgb
 import android.graphics.Paint
@@ -19,17 +21,18 @@ import android.widget.ListView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.sirmo.androidapp.databinding.ActivityMainBinding
+import android.app.Application
 
 
 class MainActivity : AppCompatActivity() {
-
+    private lateinit var sharedpreferences: SharedPreferences
     private lateinit var binding: ActivityMainBinding
     private lateinit var lvToDoList: ListView
     private lateinit var fab: FloatingActionButton
+
     //private lateinit var materialToolbar: MaterialToolbar
     //private lateinit var materialToolbar2: MaterialToolbar
     private lateinit var textView: TextView
@@ -61,7 +64,8 @@ class MainActivity : AppCompatActivity() {
         lvToDoList.onItemLongClickListener = OnItemLongClickListener { _, _, pos, _ ->
             items.removeAt(pos)
             itemAdapter.notifyDataSetChanged()
-            Toast.makeText(applicationContext, "Element successfully deleted!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(applicationContext, "Element successfully deleted!", Toast.LENGTH_SHORT)
+                .show()
 
             true
         }
@@ -71,15 +75,16 @@ class MainActivity : AppCompatActivity() {
         val colorWhiteLight = Color.parseColor(getString(R.color.white_light))
 
         //imageView.setImageResource(R.drawable.ic_launcher_background)
-        imageView.setOnClickListener{
-            val i2 = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/watch?v=dQw4w9WgXcQ"))
+        imageView.setOnClickListener {
+            val i2 =
+                Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/watch?v=dQw4w9WgXcQ"))
             startActivity(i2)
         }
 
         fab.rippleColor = colorGreen
         //fab.setColorFilter(Color.rgb(39, 158, 255))
         fab.setColorFilter(colorBlue)
-        fab.setOnClickListener{
+        fab.setOnClickListener {
 
             val builder = AlertDialog.Builder(this)
             builder.setTitle("Add task")
@@ -104,7 +109,8 @@ class MainActivity : AppCompatActivity() {
             }
 
             builder.setNegativeButton("Cancel") { _, _ ->
-                Toast.makeText(applicationContext, "Successfully cancelled!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(applicationContext, "Successfully cancelled!", Toast.LENGTH_SHORT)
+                    .show()
             }
 
             builder.show()
@@ -118,6 +124,23 @@ class MainActivity : AppCompatActivity() {
         textViewHeading.paintFlags = Paint.UNDERLINE_TEXT_FLAG
         textViewHeading.setTextColor(colorWhiteLight) //colorGreen
 
+        //Saving System
+        /*val sharedPref = getSharedPreferences(getString(R.string.com_sirmo_androidapp), Context.MODE_PRIVATE) ?: return
+        with(sharedPref.edit()) {
+            putInt(getString(R.string.com_sirmo_androidapp), colorGreen)
+            apply()
+        }
+        val shared = getPreferences(Context.MODE_PRIVATE) ?: return*/
+
+        //Alternative Saving System
+        /*class User(var username: String, sharedPref: SharedPreferences) {
+            val sharedPref : SharedPreferences = applicationContext.getSharedPreferences(R.string.com_sirmo_androidapp, MODE_PRIVATE)
+            val user = User("username", sharedPref)
+            user.Save()
+        }*/
+
+
     }
 }
+
 

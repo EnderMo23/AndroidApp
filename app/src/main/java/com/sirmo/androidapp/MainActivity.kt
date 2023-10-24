@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import android.graphics.Color
 import android.graphics.ColorSpace.Rgb
 import android.graphics.Paint
@@ -25,6 +24,11 @@ import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.sirmo.androidapp.databinding.ActivityMainBinding
 import android.app.Application
+import android.content.Context.MODE_PRIVATE
+import android.content.SharedPreferences
+import android.widget.SearchView.OnCloseListener
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 
 
 class MainActivity : AppCompatActivity() {
@@ -58,6 +62,23 @@ class MainActivity : AppCompatActivity() {
         //materialToolbar = findViewById(R.id.materialToolbar)
         //materialToolbar2 = findViewById(R.id.materialToolbar2)
 
+        /*fun loadData() {
+            val sharedPref = applicationContext.getSharedPreferences("MeineEinstellungen", Context.MODE_PRIVATE)
+            val gson = Gson()
+            val json = sharedPref.getString("MeinSchlüssel", null)
+            val type = object : TypeToken<ArrayList<String>>() {}.type
+            items = gson.fromJson(json, type) // Konvertiert den JSON-String zurück in eine ArrayList
+
+            // Wenn keine gespeicherte Liste gefunden wurde, initialisieren Sie items als eine leere Liste
+            if (items == null) {
+                items = ArrayList()
+            }
+        }
+
+        loadData()*/
+
+
+
         itemAdapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, items)
         lvToDoList.adapter = itemAdapter
 
@@ -77,7 +98,7 @@ class MainActivity : AppCompatActivity() {
         //imageView.setImageResource(R.drawable.ic_launcher_background)
         imageView.setOnClickListener {
             val i2 =
-                Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/watch?v=dQw4w9WgXcQ"))
+                Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/watch?v=xvFZjo5PgG0"))
             startActivity(i2)
         }
 
@@ -134,12 +155,42 @@ class MainActivity : AppCompatActivity() {
 
         //Alternative Saving System
         /*class User(var username: String, sharedPref: SharedPreferences) {
-            val sharedPref : SharedPreferences = applicationContext.getSharedPreferences(R.string.com_sirmo_androidapp, MODE_PRIVATE)
-            val user = User("username", sharedPref)
+            val sharedPreff : SharedPreferences = applicationContext.getSharedPreferences("com.sirmo.androidapp", MODE_PRIVATE)
+            val user = User("sirmo", sharedPref)
             user.Save()
         }*/
 
+        /*class User (var username : String) {
+            private val PREFERENCE_FILE_KEY = "myAppPreference"
+            private val USERNAME_KEY = "username"
 
+            fun saveUsername(context: Context) {
+                val sharedPref = context.getSharedPreferences(PREFERENCE_FILE_KEY, MODE_PRIVATE)
+                with (sharedPref.edit()) {
+                    putString(USERNAME_KEY, username)
+                    apply()
+                }
+            }
+        }
+
+        val user = User("SirMo_")
+        user.saveUsername(this)*/
+
+        /*val gson = Gson()
+        val json = gson.toJson(items) // Konvertiert die ArrayList in einen JSON-String
+
+        val sharedPref = applicationContext.getSharedPreferences("MeineEinstellungen", Context.MODE_PRIVATE)
+        with (sharedPref.edit()) {
+            putString("MeinSchlüssel", json)
+            apply()
+        }
+
+        //val sharedPref = applicationContext.getSharedPreferences("MeineEinstellungen", Context.MODE_PRIVATE)
+        val jsonRetrieve = sharedPref.getString("MeinSchlüssel", null)
+
+        val type = object : TypeToken<ArrayList<String>>() {}.type
+        val arrayList: ArrayList<String> = gson.fromJson(jsonRetrieve, type) // Konvertiert den JSON-String zurück in eine ArrayList
+*/
     }
 }
 

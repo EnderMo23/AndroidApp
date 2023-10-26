@@ -29,6 +29,7 @@ import android.content.SharedPreferences
 import android.widget.SearchView.OnCloseListener
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import kotlin.math.log
 
 
 class MainActivity : AppCompatActivity() {
@@ -53,29 +54,119 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+
         imageView = findViewById(R.id.imageView2)
         textView = findViewById(R.id.textView)
         textViewHeading = findViewById(R.id.textView2)
         lvToDoList = findViewById(R.id.lvToDoList)
         fab = findViewById(R.id.floatingActionButton2)
         items = ArrayList()
+
         //materialToolbar = findViewById(R.id.materialToolbar)
         //materialToolbar2 = findViewById(R.id.materialToolbar2)
 
-        /*fun loadData() {
-            val sharedPref = applicationContext.getSharedPreferences("MeineEinstellungen", Context.MODE_PRIVATE)
+        /*fun loadData(context: Context) {
+            val sharedPref = context.getSharedPreferences("MeineEinstellungen", Context.MODE_PRIVATE)
             val gson = Gson()
             val json = sharedPref.getString("MeinSchlüssel", null)
-            val type = object : TypeToken<ArrayList<String>>() {}.type
-            items = gson.fromJson(json, type) // Konvertiert den JSON-String zurück in eine ArrayList
+            Log.i("loadData", "Geladener JSON-String: $json")
+
 
             // Wenn keine gespeicherte Liste gefunden wurde, initialisieren Sie items als eine leere Liste
-            if (items == null) {
+            if (json != null) {
+                val type = object : TypeToken<ArrayList<String>>() {}.type
+                items = gson.fromJson(json, type) // Konvertiert den JSON-String zurück in eine ArrayList
+                Log.i("loadData", "Geladene Daten: $items")
+
+            } else {
                 items = ArrayList()
             }
         }
 
-        loadData()*/
+        fun saveData() {
+            if (items.isNotEmpty()) {
+                val sharedPref = applicationContext.getSharedPreferences("MeineEinstellungen", Context.MODE_PRIVATE)
+                val editor = sharedPref.edit()
+                val gson = Gson()
+                Log.i("saveData", "Speichere Daten: $items")
+                val json = gson.toJson(items) // Konvertiert die ArrayList in einen JSON-String
+                Log.i("saveData", "Gespeicherter JSON-String: $json")
+                editor.putString("MeinSchlüssel", json)
+                val success = editor.commit() // Verwendet commit() anstelle von apply(), um den Erfolg des Speicherns zu überprüfen
+                if (success) {
+                    Log.i("saveData", "Daten erfolgreich gespeichert")
+                } else {
+                    Log.e("saveData", "Fehler beim Speichern der Daten")
+                }
+            } else {
+                Log.w("saveData", "Keine Daten zum Speichern vorhanden")
+            }
+        }*/
+
+        fun saveData() {
+            if (items.isNotEmpty()) {
+                Log.i("saveData", "Items vor dem Speichern: $items")
+                val sharedPref = applicationContext.getSharedPreferences("MeineEinstellungen", Context.MODE_PRIVATE)
+                val editor = sharedPref.edit()
+                val gson = Gson()
+                val json = gson.toJson(items) // Konvertiert die ArrayList in einen JSON-String
+                editor.putString("MeinSchlüssel", json)
+                val success = editor.commit() // Verwendet commit() anstelle von apply(), um den Erfolg des Speicherns zu überprüfen
+                if (success) {
+                    Log.i("saveData", "Daten erfolgreich gespeichert")
+                } else {
+                    Log.e("saveData", "Fehler beim Speichern der Daten")
+                }
+            } else {
+                Log.w("saveData", "Keine Daten zum Speichern vorhanden")
+            }
+        }
+
+        fun loadData(context: Context) {
+            val sharedPref = context.getSharedPreferences("MeineEinstellungen", Context.MODE_PRIVATE)
+            val gson = Gson()
+            val json = sharedPref.getString("MeinSchlüssel", null)
+
+            // Wenn keine gespeicherte Liste gefunden wurde, initialisieren Sie items als eine leere Liste
+            if (json != null) {
+                val type = object : TypeToken<ArrayList<String>>() {}.type
+                items = gson.fromJson(json, type) // Konvertiert den JSON-String zurück in eine ArrayList
+                Log.i("loadData", "Items nach dem Laden: $items")
+            } else {
+                items = ArrayList()
+            }
+        }
+
+
+        fun clearData() {
+            val sharedPref = applicationContext.getSharedPreferences("MeineEinstellungen", Context.MODE_PRIVATE)
+            val editor = sharedPref.edit()
+            editor.clear()
+            editor.apply()
+            println("Test")
+        }
+
+        //clearData()
+        loadData(this)
+
+
+
+        /*fun loadData() {
+            val sharedPref = applicationContext.getSharedPreferences("MeineEinstellungen", Context.MODE_PRIVATE)
+            val gson = Gson()
+            val editor = sharedPref.edit()
+            val json = sharedPref.getString("MeinSchlüssel", null)
+            editor.putString("MeinSchlüssel", "Ihr Wert")
+            editor.apply()
+
+            // Wenn keine gespeicherte Liste gefunden wurde, initialisieren Sie items als eine leere Liste
+            if (json != null) {
+                val type = object : TypeToken<ArrayList<String>>() {}.type
+                items = gson.fromJson(json, type) // Konvertiert den JSON-String zurück in eine ArrayList
+            } else {
+                items = ArrayList()
+            }
+        }*/
 
 
 
@@ -126,6 +217,7 @@ class MainActivity : AppCompatActivity() {
 
             builder.setPositiveButton("OK") { _, _ ->
                 items.add(inputField.text.toString())
+                saveData()
                 //Toast.makeText(applicationContext, "Task successfully added with the name ${inputField.text}" + "!", Toast.LENGTH_SHORT).show()
             }
 

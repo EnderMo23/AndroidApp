@@ -54,7 +54,7 @@
             android:id="@+id/lvToDoList"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#131212">
+            android:background="#000000">
 
         </ListView>
 

@@ -65,44 +65,6 @@ class MainActivity : AppCompatActivity() {
         //materialToolbar = findViewById(R.id.materialToolbar)
         //materialToolbar2 = findViewById(R.id.materialToolbar2)
 
-        /*fun loadData(context: Context) {
-            val sharedPref = context.getSharedPreferences("MeineEinstellungen", Context.MODE_PRIVATE)
-            val gson = Gson()
-            val json = sharedPref.getString("MeinSchlüssel", null)
-            Log.i("loadData", "Geladener JSON-String: $json")
-
-
-            // Wenn keine gespeicherte Liste gefunden wurde, initialisieren Sie items als eine leere Liste
-            if (json != null) {
-                val type = object : TypeToken<ArrayList<String>>() {}.type
-                items = gson.fromJson(json, type) // Konvertiert den JSON-String zurück in eine ArrayList
-                Log.i("loadData", "Geladene Daten: $items")
-
-            } else {
-                items = ArrayList()
-            }
-        }
-
-        fun saveData() {
-            if (items.isNotEmpty()) {
-                val sharedPref = applicationContext.getSharedPreferences("MeineEinstellungen", Context.MODE_PRIVATE)
-                val editor = sharedPref.edit()
-                val gson = Gson()
-                Log.i("saveData", "Speichere Daten: $items")
-                val json = gson.toJson(items) // Konvertiert die ArrayList in einen JSON-String
-                Log.i("saveData", "Gespeicherter JSON-String: $json")
-                editor.putString("MeinSchlüssel", json)
-                val success = editor.commit() // Verwendet commit() anstelle von apply(), um den Erfolg des Speicherns zu überprüfen
-                if (success) {
-                    Log.i("saveData", "Daten erfolgreich gespeichert")
-                } else {
-                    Log.e("saveData", "Fehler beim Speichern der Daten")
-                }
-            } else {
-                Log.w("saveData", "Keine Daten zum Speichern vorhanden")
-            }
-        }*/
-
         fun saveData() {
             if (items.isNotEmpty()) {
                 Log.i("saveData", "Items vor dem Speichern: $items")
@@ -149,32 +111,12 @@ class MainActivity : AppCompatActivity() {
         //clearData()
         loadData(this)
 
-
-
-        /*fun loadData() {
-            val sharedPref = applicationContext.getSharedPreferences("MeineEinstellungen", Context.MODE_PRIVATE)
-            val gson = Gson()
-            val editor = sharedPref.edit()
-            val json = sharedPref.getString("MeinSchlüssel", null)
-            editor.putString("MeinSchlüssel", "Ihr Wert")
-            editor.apply()
-
-            // Wenn keine gespeicherte Liste gefunden wurde, initialisieren Sie items als eine leere Liste
-            if (json != null) {
-                val type = object : TypeToken<ArrayList<String>>() {}.type
-                items = gson.fromJson(json, type) // Konvertiert den JSON-String zurück in eine ArrayList
-            } else {
-                items = ArrayList()
-            }
-        }*/
-
-
-
         itemAdapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, items)
         lvToDoList.adapter = itemAdapter
 
         lvToDoList.onItemLongClickListener = OnItemLongClickListener { _, _, pos, _ ->
             items.removeAt(pos)
+            saveData()
             itemAdapter.notifyDataSetChanged()
             Toast.makeText(applicationContext, "Element successfully deleted!", Toast.LENGTH_SHORT)
                 .show()
@@ -237,52 +179,9 @@ class MainActivity : AppCompatActivity() {
         textViewHeading.paintFlags = Paint.UNDERLINE_TEXT_FLAG
         textViewHeading.setTextColor(colorWhiteLight) //colorGreen
 
-        //Saving System
-        /*val sharedPref = getSharedPreferences(getString(R.string.com_sirmo_androidapp), Context.MODE_PRIVATE) ?: return
-        with(sharedPref.edit()) {
-            putInt(getString(R.string.com_sirmo_androidapp), colorGreen)
-            apply()
+        fun test(string: String) {
+            items.add(string)
         }
-        val shared = getPreferences(Context.MODE_PRIVATE) ?: return*/
-
-        //Alternative Saving System
-        /*class User(var username: String, sharedPref: SharedPreferences) {
-            val sharedPreff : SharedPreferences = applicationContext.getSharedPreferences("com.sirmo.androidapp", MODE_PRIVATE)
-            val user = User("sirmo", sharedPref)
-            user.Save()
-        }*/
-
-        /*class User (var username : String) {
-            private val PREFERENCE_FILE_KEY = "myAppPreference"
-            private val USERNAME_KEY = "username"
-
-            fun saveUsername(context: Context) {
-                val sharedPref = context.getSharedPreferences(PREFERENCE_FILE_KEY, MODE_PRIVATE)
-                with (sharedPref.edit()) {
-                    putString(USERNAME_KEY, username)
-                    apply()
-                }
-            }
-        }
-
-        val user = User("SirMo_")
-        user.saveUsername(this)*/
-
-        /*val gson = Gson()
-        val json = gson.toJson(items) // Konvertiert die ArrayList in einen JSON-String
-
-        val sharedPref = applicationContext.getSharedPreferences("MeineEinstellungen", Context.MODE_PRIVATE)
-        with (sharedPref.edit()) {
-            putString("MeinSchlüssel", json)
-            apply()
-        }
-
-        //val sharedPref = applicationContext.getSharedPreferences("MeineEinstellungen", Context.MODE_PRIVATE)
-        val jsonRetrieve = sharedPref.getString("MeinSchlüssel", null)
-
-        val type = object : TypeToken<ArrayList<String>>() {}.type
-        val arrayList: ArrayList<String> = gson.fromJson(jsonRetrieve, type) // Konvertiert den JSON-String zurück in eine ArrayList
-*/
     }
 }
 

@@ -27,8 +27,10 @@ import android.app.Application
 import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
 import android.widget.SearchView.OnCloseListener
+import androidx.core.content.ContextCompat
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import com.sirmo.androidapp.listener.OnClick
 import kotlin.math.log
 
 
@@ -37,7 +39,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var lvToDoList: ListView
     private lateinit var fab: FloatingActionButton
-
     //private lateinit var materialToolbar: MaterialToolbar
     //private lateinit var materialToolbar2: MaterialToolbar
     private lateinit var textView: TextView
@@ -64,7 +65,6 @@ class MainActivity : AppCompatActivity() {
 
         //materialToolbar = findViewById(R.id.materialToolbar)
         //materialToolbar2 = findViewById(R.id.materialToolbar2)
-
         fun saveData() {
             if (items.isNotEmpty()) {
                 Log.i("saveData", "Items vor dem Speichern: $items")
@@ -114,6 +114,12 @@ class MainActivity : AppCompatActivity() {
         itemAdapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, items)
         lvToDoList.adapter = itemAdapter
 
+        imageView.setOnClickListener {
+            val i2 =
+                Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/watch?v=xvFZjo5PgG0"))
+            startActivity(i2)
+        }
+
         lvToDoList.onItemLongClickListener = OnItemLongClickListener { _, _, pos, _ ->
             items.removeAt(pos)
             saveData()
@@ -123,22 +129,18 @@ class MainActivity : AppCompatActivity() {
 
             true
         }
+
         val colorGreen = Color.parseColor(getString(R.color.green))
         val colorGreenDark = Color.parseColor(getString(R.color.green_dark))
         val colorBlue = Color.parseColor(getString(R.color.blue))
         val colorWhiteLight = Color.parseColor(getString(R.color.white_light))
 
-        //imageView.setImageResource(R.drawable.ic_launcher_background)
-        imageView.setOnClickListener {
-            val i2 =
-                Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/watch?v=xvFZjo5PgG0"))
-            startActivity(i2)
-        }
+
 
         fab.rippleColor = colorGreen
         //fab.setColorFilter(Color.rgb(39, 158, 255))
         fab.setColorFilter(colorBlue)
-        fab.setOnClickListener {
+        /*fab.setOnClickListener {
 
             val builder = AlertDialog.Builder(this)
             builder.setTitle("Add task")
@@ -169,7 +171,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             builder.show()
-        }
+        }*/
 
         //materialToolbar2.setTitleTextColor(Color.WHITE)
 
@@ -182,6 +184,10 @@ class MainActivity : AppCompatActivity() {
         fun test(string: String) {
             items.add(string)
         }
+
+        val onClick = OnClick(imageView)
+        onClick.setFabClickListener(fab, items, this)
+
     }
 }
 

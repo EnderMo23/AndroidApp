@@ -55,7 +55,6 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
         imageView = findViewById(R.id.imageView2)
         textView = findViewById(R.id.textView)
         textViewHeading = findViewById(R.id.textView2)
@@ -114,12 +113,6 @@ class MainActivity : AppCompatActivity() {
         itemAdapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, items)
         lvToDoList.adapter = itemAdapter
 
-        imageView.setOnClickListener {
-            val i2 =
-                Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/watch?v=xvFZjo5PgG0"))
-            startActivity(i2)
-        }
-
         lvToDoList.onItemLongClickListener = OnItemLongClickListener { _, _, pos, _ ->
             items.removeAt(pos)
             saveData()
@@ -135,43 +128,9 @@ class MainActivity : AppCompatActivity() {
         val colorBlue = Color.parseColor(getString(R.color.blue))
         val colorWhiteLight = Color.parseColor(getString(R.color.white_light))
 
-
-
         fab.rippleColor = colorGreen
         //fab.setColorFilter(Color.rgb(39, 158, 255))
         fab.setColorFilter(colorBlue)
-        /*fab.setOnClickListener {
-
-            val builder = AlertDialog.Builder(this)
-            builder.setTitle("Add task")
-                .setIcon(android.R.drawable.ic_input_add)
-            //builder.setTitle
-
-            val inputField = EditText(this)
-
-            inputField.hint = "Type task in here"
-            inputField.inputType = InputType.TYPE_CLASS_TEXT
-            inputField.setTextColor(colorGreen)
-            builder.setView(inputField)
-
-            if (inputField.text.isEmpty()) {
-                items.remove(inputField.text.toString())
-                //Toast.makeText(applicationContext, "Please enter a task!", Toast.LENGTH_SHORT).show()
-            }
-
-            builder.setPositiveButton("OK") { _, _ ->
-                items.add(inputField.text.toString())
-                saveData()
-                //Toast.makeText(applicationContext, "Task successfully added with the name ${inputField.text}" + "!", Toast.LENGTH_SHORT).show()
-            }
-
-            builder.setNegativeButton("Cancel") { _, _ ->
-                Toast.makeText(applicationContext, "Successfully cancelled!", Toast.LENGTH_SHORT)
-                    .show()
-            }
-
-            builder.show()
-        }*/
 
         //materialToolbar2.setTitleTextColor(Color.WHITE)
 
@@ -187,7 +146,6 @@ class MainActivity : AppCompatActivity() {
 
         val onClick = OnClick(imageView)
         onClick.setFabClickListener(fab, items, this)
-
     }
 }
 

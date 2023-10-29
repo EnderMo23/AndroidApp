@@ -30,10 +30,13 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.SearchView.OnCloseListener
 import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.ItemTouchHelper
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.sirmo.androidapp.listener.OnClick
 import com.sirmo.androidapp.manager.DataManager
+import java.util.Collections
+import java.util.zip.Inflater
 import kotlin.math.log
 
 
@@ -107,21 +110,30 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu_supermarkets, menu)
+        return true
+    }
+
+    /*override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
-            R.id.action_settings -> {
+            R.id.action_add -> {
                 Toast.makeText(this, "Action was pressed!!!", Toast.LENGTH_SHORT).show()
                 println("Action")
                 return true
             }
-            R.id.action_logout -> {
+            R.id.action_remove -> {
                 items.add("Action Logout")
                 println("LogOut")
                 return true
             }
+            R.id.action_listview -> {
+                println("Action List View")
+                return true
+            }
             else -> super.onOptionsItemSelected(item)
         }
-    }
+    }*/
 }
 
 

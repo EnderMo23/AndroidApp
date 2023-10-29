@@ -2,18 +2,18 @@
 <menu xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/action_settings"
+        android:id="@+id/action_add"
         android:orderInCategory="100"
-        android:title="@string/action_settings"
-        app:showAsAction="never" />
+        android:title="Add new List"
+        app:showAsAction="always" />
     <item
-        android:id="@+id/action_profile"
+        android:id="@+id/action_remove"
         android:orderInCategory="200"
-        android:title="@string/action_profile"
+        android:title="Delete this list"
         app:showAsAction="ifRoom" />
     <item
-        android:id="@+id/action_logout"
-        android:orderInCategory="300"
-        android:title="@string/action_logout"
+        android:id="@+id/action_listview"
+        android:orderInCategory="200"
+        android:title="Your lists"
         app:showAsAction="ifRoom" />
 </menu>

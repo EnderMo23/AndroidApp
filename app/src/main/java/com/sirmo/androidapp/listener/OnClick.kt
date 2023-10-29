@@ -11,10 +11,14 @@ import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.text.InputType
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.widget.AdapterView
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.ListView
+import android.widget.PopupMenu
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -24,8 +28,22 @@ import com.sirmo.androidapp.manager.DataManager
 class OnClick(private val imageView: ImageView) {
     init {
         imageView.setOnClickListener {
-            val i2 = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/watch?v=xvFZjo5PgG0"))
-            imageView.context.startActivity(i2)
+            val popupMenu = PopupMenu(it.context, it)
+            popupMenu.menuInflater.inflate(R.menu.menu_supermarkets, popupMenu.menu)
+            /*popupMenu.setOnMenuItemClickListener { menuItem ->
+                when (menuItem.itemId) {
+                    com.google.android.material.R.id.dropdown_menu -> {
+                        println("Menu wurde angeklickt!")
+                    }
+                    androidx.appcompat.R.id.expanded_menu -> {
+                        println("Menu2 wurde angeklickt!")
+                    }
+                }
+            }*/
+            popupMenu.show()
+            /*val i2 = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/watch?v=xvFZjo5PgG0"))
+            imageView.context.startActivity(i2)*/
+
         }
     }
     fun setFabClickListener(fab: FloatingActionButton, items: ArrayList<String>, applicationContext: Context) {

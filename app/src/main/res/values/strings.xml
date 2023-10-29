@@ -7,6 +7,8 @@
     <string name="next">Next</string>
     <string name="previous">Previous</string>
     <string name="com.sirmo.androidapp">Preference</string>
+    <string name="action_profile">ActionProfile</string>
+    <string name="action_logout">ActionLogOut</string>
 
     <string name="lorem_ipsum">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris

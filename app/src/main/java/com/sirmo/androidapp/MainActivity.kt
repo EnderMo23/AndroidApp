@@ -26,6 +26,8 @@ import com.sirmo.androidapp.databinding.ActivityMainBinding
 import android.app.Application
 import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.SearchView.OnCloseListener
 import androidx.core.content.ContextCompat
 import com.google.gson.Gson
@@ -48,7 +50,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var items: ArrayList<String>
     private lateinit var itemAdapter: ArrayAdapter<String>
     private lateinit var mTitle: TextView
-
 
     @SuppressLint("ResourceType")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -104,6 +105,22 @@ class MainActivity : AppCompatActivity() {
         val onClick = OnClick(imageView)
         onClick.setFabClickListener(fab, items, this)
 
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_settings -> {
+                Toast.makeText(this, "Action was pressed!!!", Toast.LENGTH_SHORT).show()
+                println("Action")
+                return true
+            }
+            R.id.action_logout -> {
+                items.add("Action Logout")
+                println("LogOut")
+                return true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 }
 

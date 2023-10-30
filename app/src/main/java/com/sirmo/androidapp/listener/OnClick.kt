@@ -1,28 +1,14 @@
 package com.sirmo.androidapp.listener
 
-import android.app.Activity
 import android.app.AlertDialog
-import android.content.ClipData.Item
 import android.content.Context
-import com.sirmo.androidapp.R
-
-import android.content.Intent
 import android.graphics.Color
-import android.net.Uri
-import android.os.Bundle
 import android.text.InputType
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
-import android.widget.AdapterView
 import android.widget.EditText
 import android.widget.ImageView
-import android.widget.ListView
 import android.widget.PopupMenu
-import android.widget.Toast
-import androidx.activity.result.contract.ActivityResultContracts
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.sirmo.androidapp.MainActivity
+import com.sirmo.androidapp.R
 import com.sirmo.androidapp.manager.DataManager
 
 class OnClick(private val imageView: ImageView, items: ArrayList<String>, onMenuItemClicked: (itemId: Int) -> Unit) {

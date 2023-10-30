@@ -1,44 +1,21 @@
 package com.sirmo.androidapp
 
 import android.annotation.SuppressLint
-import android.app.AlertDialog
-import android.content.Context
-import android.content.Intent
+import android.content.SharedPreferences
 import android.graphics.Color
-import android.graphics.ColorSpace.Rgb
 import android.graphics.Paint
-import android.net.Uri
 import android.os.Bundle
-import android.text.InputType
-import android.text.style.ForegroundColorSpan
-import android.util.Log
 import android.widget.AdapterView.OnItemLongClickListener
 import android.widget.ArrayAdapter
-import android.widget.EditText
 import android.widget.ImageView
 import android.widget.ListView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.sirmo.androidapp.databinding.ActivityMainBinding
-import android.app.Application
-import android.content.Context.MODE_PRIVATE
-import android.content.SharedPreferences
-import android.view.Menu
-import android.view.MenuItem
-import android.widget.PopupMenu
-import android.widget.SearchView.OnCloseListener
-import androidx.core.content.ContextCompat
-import androidx.recyclerview.widget.ItemTouchHelper
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 import com.sirmo.androidapp.listener.OnClick
 import com.sirmo.androidapp.manager.DataManager
-import java.util.Collections
-import java.util.zip.Inflater
-import kotlin.math.log
 
 
 class MainActivity : AppCompatActivity() {
@@ -46,8 +23,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var lvToDoList: ListView
     private lateinit var fab: FloatingActionButton
-    //private lateinit var materialToolbar: MaterialToolbar
-    //private lateinit var materialToolbar2: MaterialToolbar
     private lateinit var textView: TextView
     private lateinit var textViewHeading: TextView
     private lateinit var imageView: ImageView
@@ -67,8 +42,6 @@ class MainActivity : AppCompatActivity() {
         lvToDoList = findViewById(R.id.lvToDoList)
         fab = findViewById(R.id.floatingActionButton2)
         items = ArrayList()
-        //materialToolbar = findViewById(R.id.materialToolbar)
-        //materialToolbar2 = findViewById(R.id.materialToolbar2)
 
         DataManager.loadData(this, items)
 
@@ -114,11 +87,13 @@ class MainActivity : AppCompatActivity() {
                 }
                 R.id.action_remove -> {
                     items.add("Action remove")
+                    //DataManager.saveData(items, this)
                     println("Remove")
                     itemAdapter.notifyDataSetChanged()
                 }
                 R.id.action_listview -> {
                     items.add("ListView")
+                    //DataManager.saveData(items, this)
                     println("Action List View")
                     itemAdapter.notifyDataSetChanged()
                 }

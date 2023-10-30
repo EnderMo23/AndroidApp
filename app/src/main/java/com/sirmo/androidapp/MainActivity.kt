@@ -28,6 +28,7 @@ import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.PopupMenu
 import android.widget.SearchView.OnCloseListener
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -105,35 +106,26 @@ class MainActivity : AppCompatActivity() {
             items.add(string)
         }
 
-        val onClick = OnClick(imageView)
-        onClick.setFabClickListener(fab, items, this)
-
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.menu_supermarkets, menu)
-        return true
-    }
-
-    /*override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.action_add -> {
-                Toast.makeText(this, "Action was pressed!!!", Toast.LENGTH_SHORT).show()
-                println("Action")
-                return true
+        val onClick = OnClick(imageView, items) {itemId->
+            when (itemId) {
+                R.id.action_add -> {
+                    Toast.makeText(this, "Action was pressed!!!", Toast.LENGTH_SHORT).show()
+                    println("Action")
+                }
+                R.id.action_remove -> {
+                    items.add("Action remove")
+                    println("Remove")
+                    itemAdapter.notifyDataSetChanged()
+                }
+                R.id.action_listview -> {
+                    items.add("ListView")
+                    println("Action List View")
+                    itemAdapter.notifyDataSetChanged()
+                }
             }
-            R.id.action_remove -> {
-                items.add("Action Logout")
-                println("LogOut")
-                return true
-            }
-            R.id.action_listview -> {
-                println("Action List View")
-                return true
-            }
-            else -> super.onOptionsItemSelected(item)
         }
-    }*/
+        onClick.setFabClickListener(fab, items, this)
+    }
 }
 
 

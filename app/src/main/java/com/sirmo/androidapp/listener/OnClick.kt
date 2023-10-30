@@ -25,22 +25,17 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.sirmo.androidapp.MainActivity
 import com.sirmo.androidapp.manager.DataManager
 
-class OnClick(private val imageView: ImageView) {
+class OnClick(private val imageView: ImageView, items: ArrayList<String>, onMenuItemClicked: (itemId: Int) -> Unit) {
     init {
         imageView.setOnClickListener {
             val popupMenu = PopupMenu(it.context, it)
             popupMenu.menuInflater.inflate(R.menu.menu_supermarkets, popupMenu.menu)
-            /*popupMenu.setOnMenuItemClickListener { menuItem ->
-                when (menuItem.itemId) {
-                    com.google.android.material.R.id.dropdown_menu -> {
-                        println("Menu wurde angeklickt!")
-                    }
-                    androidx.appcompat.R.id.expanded_menu -> {
-                        println("Menu2 wurde angeklickt!")
-                    }
-                }
-            }*/
+            popupMenu.setOnMenuItemClickListener { item ->
+                onMenuItemClicked(item.itemId)
+                true
+            }
             popupMenu.show()
+
             /*val i2 = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/watch?v=xvFZjo5PgG0"))
             imageView.context.startActivity(i2)*/
 

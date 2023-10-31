@@ -1,7 +1,6 @@
 package com.sirmo.androidapp
 
 import android.annotation.SuppressLint
-import android.content.SharedPreferences
 import android.graphics.Color
 import android.graphics.Paint
 import android.os.Bundle
@@ -20,7 +19,6 @@ import com.sirmo.androidapp.manager.DataManager
 
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var sharedpreferences: SharedPreferences
     private lateinit var binding: ActivityMainBinding
     private lateinit var lvToDoList: ListView
     private lateinit var fab: FloatingActionButton
@@ -29,7 +27,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var imageView: ImageView
     private lateinit var items: ArrayList<String>
     private lateinit var itemAdapter: ArrayAdapter<String>
-    private lateinit var mTitle: TextView
 
     @SuppressLint("ResourceType")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -80,27 +77,33 @@ class MainActivity : AppCompatActivity() {
             items.add(string)
         }
 
-        val onClick = OnClick(imageView, items) {itemId->
+        /*val element = findViewById<View>(R.id.action_listview)
+        fun showPopupMenu(view: View) {
+            val popupMenu = PopupMenu(this, view)
+            popupMenu.menuInflater.inflate(R.menu.menu_main, popupMenu.menu)
+        }*/
+
+        val onClick = OnClick(imageView, items) { itemId ->
             when (itemId) {
                 R.id.action_add -> {
                     Toast.makeText(this, "Action was pressed!!!", Toast.LENGTH_SHORT).show()
                     println("Action")
                     MenuClick.setMenuAddClickListener(this, items)
                 }
+
                 R.id.action_remove -> {
-                    items.add("Action remove")
-                    //DataManager.saveData(items, this)
                     println("Remove")
+                    MenuClick.setMenuRemoveClickListener(items)
                     itemAdapter.notifyDataSetChanged()
                 }
+
                 R.id.action_listview -> {
-                    items.add("ListView")
-                    //DataManager.saveData(items, this)
                     println("Action List View")
-                    itemAdapter.notifyDataSetChanged()
+                    //showPopupMenu(findViewById(R.id.action_listview))
                 }
             }
         }
+
         onClick.setFabClickListener(fab, items, this)
     }
 }

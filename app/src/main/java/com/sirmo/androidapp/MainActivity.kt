@@ -14,6 +14,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.sirmo.androidapp.databinding.ActivityMainBinding
+import com.sirmo.androidapp.listener.MenuClick
 import com.sirmo.androidapp.listener.OnClick
 import com.sirmo.androidapp.manager.DataManager
 
@@ -84,6 +85,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.action_add -> {
                     Toast.makeText(this, "Action was pressed!!!", Toast.LENGTH_SHORT).show()
                     println("Action")
+                    MenuClick.setMenuAddClickListener(this, items)
                 }
                 R.id.action_remove -> {
                     items.add("Action remove")

@@ -27,7 +27,12 @@ class OnClick(private val imageView: ImageView, items: ArrayList<String>, onMenu
 
         }
     }
-    fun setFabClickListener(fab: FloatingActionButton, items: ArrayList<String>, applicationContext: Context) {
+
+    fun setFabClickListener(
+        fab: FloatingActionButton,
+        items: ArrayList<String>,
+        applicationContext: Context
+    ) {
         fab.setOnClickListener {
             val builder = AlertDialog.Builder(fab.context)
             builder.setTitle("Add task")

@@ -43,6 +43,8 @@ class MainActivity : AppCompatActivity() {
 
         DataManager.loadData(this, items)
 
+        val colors = com.sirmo.androidapp.manager.Color(this)
+
         itemAdapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, items)
         lvToDoList.adapter = itemAdapter
 
@@ -56,22 +58,14 @@ class MainActivity : AppCompatActivity() {
             true
         }
 
-        val colorGreen = Color.parseColor(getString(R.color.green))
-        val colorGreenDark = Color.parseColor(getString(R.color.green_dark))
-        val colorBlue = Color.parseColor(getString(R.color.blue))
-        val colorWhiteLight = Color.parseColor(getString(R.color.white_light))
-
-        fab.rippleColor = colorGreen
-        //fab.setColorFilter(Color.rgb(39, 158, 255))
-        fab.setColorFilter(colorBlue)
-
-        //materialToolbar2.setTitleTextColor(Color.WHITE)
+        fab.rippleColor = colors.colorGreen
+        fab.setColorFilter(colors.colorWhiteLight)
 
         textView.paintFlags = Paint.UNDERLINE_TEXT_FLAG
         textView.setTextColor(Color.WHITE) //colorGreenDark
 
         textViewHeading.paintFlags = Paint.UNDERLINE_TEXT_FLAG
-        textViewHeading.setTextColor(colorWhiteLight) //colorGreen
+        textViewHeading.setTextColor(colors.colorWhiteLight) //colorGreen
 
         fun test(string: String) {
             items.add(string)

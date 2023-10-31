@@ -5,16 +5,16 @@ import android.content.Context
 import android.graphics.Color
 import android.text.InputType
 import android.widget.EditText
+import android.widget.TextView
 import com.sirmo.androidapp.manager.DataManager
 
 class MenuClick {
     companion object {
-        fun createNewList(items: ArrayList<String>, context: Context) {
-            val oldList = items
+        private fun createNewList(items: ArrayList<String>, context: Context) {
             items.clear()
             DataManager.saveData(items, context)
         }
-        fun setMenuAddClickListener(context: Context, items: ArrayList<String>) {
+        fun setMenuAddClickListener(context: Context, items: ArrayList<String>, textView: TextView) {
             println("Add was pressed!!!!!!!!!!")
             val builder = AlertDialog.Builder(context)
             builder.setTitle("Add new List")
@@ -33,6 +33,7 @@ class MenuClick {
                 println("New list was created with the name ${inputField.text}!!!")
                 //items.add(inputField.text.toString())
                 createNewList(items, context)
+                textView.text = inputField.text.toString()
             }
 
             builder.setNegativeButton("Cancel") { _, _ ->

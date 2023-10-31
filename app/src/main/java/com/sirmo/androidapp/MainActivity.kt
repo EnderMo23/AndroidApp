@@ -88,7 +88,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.action_add -> {
                     Toast.makeText(this, "Action was pressed!!!", Toast.LENGTH_SHORT).show()
                     println("Action")
-                    MenuClick.setMenuAddClickListener(this, items)
+                    MenuClick.setMenuAddClickListener(this, items, textView)
                 }
 
                 R.id.action_remove -> {

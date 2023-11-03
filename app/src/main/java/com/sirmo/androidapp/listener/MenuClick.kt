@@ -34,6 +34,7 @@ class MenuClick {
                 //items.add(inputField.text.toString())
                 createNewList(items, context)
                 textView.text = inputField.text.toString()
+                DataManager.saveData(items, context)
             }
 
             builder.setNegativeButton("Cancel") { _, _ ->

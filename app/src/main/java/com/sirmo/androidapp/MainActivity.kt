@@ -6,6 +6,7 @@ import android.graphics.Paint
 import android.os.Bundle
 import android.widget.AdapterView.OnItemLongClickListener
 import android.widget.ArrayAdapter
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.ListView
 import android.widget.TextView
@@ -19,14 +20,20 @@ import com.sirmo.androidapp.manager.DataManager
 
 
 class MainActivity : AppCompatActivity() {
+
+    companion object {
+        lateinit var itemAdapter: ArrayAdapter<String>
+    }
+
     private lateinit var binding: ActivityMainBinding
     private lateinit var lvToDoList: ListView
     private lateinit var fab: FloatingActionButton
     private lateinit var textView: TextView
     private lateinit var textViewHeading: TextView
     private lateinit var imageView: ImageView
+    private lateinit var buttonEditName: Button
+    private lateinit var buttonOverallList: Button
     private lateinit var items: ArrayList<String>
-    private lateinit var itemAdapter: ArrayAdapter<String>
 
     @SuppressLint("ResourceType")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,11 +41,22 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        /*fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+            super.onActivityResult(requestCode, resultCode, data)
+
+            if (requestCode == YOUR_REQUEST_CODE && resultCode == RESULT_OK) {
+                val receivedData = data?.getStringExtra("key")
+                // Hier können Sie den Wert verwenden, der von SecondActivity gesendet wurde
+            }
+        }*/
+
         imageView = findViewById(R.id.imageView2)
-        textView = findViewById(R.id.textView)
-        textViewHeading = findViewById(R.id.textView2)
+        textView = findViewById(R.id.heading)
+        textViewHeading = findViewById(R.id.subheading)
         lvToDoList = findViewById(R.id.lvToDoList)
         fab = findViewById(R.id.floatingActionButton2)
+        buttonEditName = findViewById(R.id.buttonEditName)
+        buttonOverallList = findViewById(R.id.buttonOverallList)
         items = ArrayList()
 
         DataManager.loadData(this, items)
@@ -99,6 +117,8 @@ class MainActivity : AppCompatActivity() {
         }
 
         onClick.setFabClickListener(fab, items, this)
+        onClick.setEditButtonClickListener(buttonEditName, this, textView)
+        onClick.setOverallListButtonClickListener(buttonOverallList, this)
     }
 }
 

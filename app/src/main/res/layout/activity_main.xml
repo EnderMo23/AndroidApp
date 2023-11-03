@@ -28,7 +28,7 @@
         android:scaleX="1">
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/heading"
             android:layout_width="match_parent"
             android:layout_height="123dp"
             android:background="#000000"
@@ -42,7 +42,7 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/subheading"
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:paddingTop="8dp"
@@ -72,5 +72,19 @@
         android:contentDescription="Info"
         android:foregroundGravity="center"
         app:srcCompat="@mipmap/to_do_shopping_list_original_xxxhdpi" />
+
+    <Button
+        android:id="@+id/buttonEditName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:text="Edit Name" />
+
+    <Button
+        android:id="@+id/buttonOverallList"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center|top"
+        android:text="OverallList" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

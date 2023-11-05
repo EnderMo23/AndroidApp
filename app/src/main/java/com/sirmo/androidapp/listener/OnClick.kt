@@ -35,7 +35,8 @@ class OnClick(private val imageView: ImageView, items: ArrayList<String>, onMenu
     fun setFabClickListener(
         fab: FloatingActionButton,
         items: ArrayList<String>,
-        applicationContext: Context
+        applicationContext: Context,
+        overAllItems: ArrayList<String>
     ) {
         fab.setOnClickListener {
             val builder = AlertDialog.Builder(fab.context)
@@ -54,7 +55,12 @@ class OnClick(private val imageView: ImageView, items: ArrayList<String>, onMenu
             }
 
             builder.setPositiveButton("OK") { _, _ ->
-                items.add(inputField.text.toString())
+                if (!items.contains(inputField.text.toString())) {
+                    items.add(inputField.text.toString())
+                }
+                if (!overAllItems.contains(inputField.text.toString())) {
+                    overAllItems.add(inputField.text.toString())
+                }
                 DataManager.saveData(items, applicationContext)
                 // saveData() // Sie müssen diese Funktion definieren
                 //Toast.makeText(fab.context, "Task successfully added with the name ${inputField.text}" + "!", Toast.LENGTH_SHORT).show()

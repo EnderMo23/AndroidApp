@@ -116,7 +116,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        onClick.setFabClickListener(fab, items, this)
+        onClick.setFabClickListener(fab, items, this, OverAllList.itemsOverAll)
         onClick.setEditButtonClickListener(buttonEditName, this, textView)
         onClick.setOverallListButtonClickListener(buttonOverallList, this)
     }

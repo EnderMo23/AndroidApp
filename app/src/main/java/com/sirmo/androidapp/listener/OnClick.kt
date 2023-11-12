@@ -16,7 +16,7 @@ import com.sirmo.androidapp.OverAllList
 import com.sirmo.androidapp.R
 import com.sirmo.androidapp.manager.DataManager
 
-class OnClick() {
+class OnClick {
     fun menuClick(imageView: ImageView, items: ArrayList<String>, onMenuItemClicked: (itemId: Int) -> Unit) {
         imageView.setOnClickListener {
             val popupMenu = PopupMenu(it.context, it)

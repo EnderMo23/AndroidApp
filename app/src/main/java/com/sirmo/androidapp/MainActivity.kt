@@ -108,7 +108,6 @@ class MainActivity : AppCompatActivity() {
 
                 R.id.action_listview -> {
                     println("Action List View")
-                    //showPopupMenu(findViewById(R.id.action_listview))
                 }
             }
         }

@@ -108,6 +108,8 @@ class MainActivity : AppCompatActivity() {
 
                 R.id.action_listview -> {
                     println("Action List View")
+                    DataManager.loadData(this, items)
+                    itemAdapter.notifyDataSetChanged()
                 }
             }
         }

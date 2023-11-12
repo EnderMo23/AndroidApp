@@ -12,10 +12,11 @@ class MenuClick {
     companion object {
         private fun createNewList(items: ArrayList<String>, context: Context) {
             items.clear()
-            DataManager.saveData(items, context)
+            //DataManager.saveData(items, context)
         }
         fun setMenuAddClickListener(context: Context, items: ArrayList<String>, textView: TextView) {
             println("Add was pressed!!!!!!!!!!")
+            DataManager.saveData(items, context)
             val builder = AlertDialog.Builder(context)
             builder.setTitle("Add new List")
                 .setIcon(android.R.drawable.ic_input_add)
@@ -34,7 +35,7 @@ class MenuClick {
                 //items.add(inputField.text.toString())
                 createNewList(items, context)
                 textView.text = inputField.text.toString()
-                DataManager.saveData(items, context)
+                //DataManager.saveData(items, context)
             }
 
             builder.setNegativeButton("Cancel") { _, _ ->

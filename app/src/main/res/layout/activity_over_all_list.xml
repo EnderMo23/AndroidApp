@@ -12,10 +12,10 @@
         android:orientation="vertical">
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/toToDoListButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="OverAllList" />
+            android:text="ToDoList" />
 
         <ListView
             android:id="@+id/overAllList"

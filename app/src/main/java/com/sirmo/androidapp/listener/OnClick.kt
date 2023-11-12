@@ -11,12 +11,13 @@ import android.widget.ImageView
 import android.widget.PopupMenu
 import android.widget.TextView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.sirmo.androidapp.MainActivity
 import com.sirmo.androidapp.OverAllList
 import com.sirmo.androidapp.R
 import com.sirmo.androidapp.manager.DataManager
 
-class OnClick(private val imageView: ImageView, items: ArrayList<String>, onMenuItemClicked: (itemId: Int) -> Unit) {
-    init {
+class OnClick() {
+    fun menuClick(imageView: ImageView, items: ArrayList<String>, onMenuItemClicked: (itemId: Int) -> Unit) {
         imageView.setOnClickListener {
             val popupMenu = PopupMenu(it.context, it)
             popupMenu.menuInflater.inflate(R.menu.menu_supermarkets, popupMenu.menu)
@@ -31,13 +32,15 @@ class OnClick(private val imageView: ImageView, items: ArrayList<String>, onMenu
 
         }
     }
+    /*init {
 
-    fun setFabClickListener(
-        fab: FloatingActionButton,
-        items: ArrayList<String>,
-        applicationContext: Context,
-        overAllItems: ArrayList<String>
-    ) {
+    }*/
+
+    fun saveOverAllList(items: ArrayList<String>, context: Context) {
+        DataManager.saveDataOverAll(items, context)
+    }
+
+    fun setFabClickListener(fab: FloatingActionButton, items: ArrayList<String>, applicationContextItems: Context, overAllItems: ArrayList<String>, applicationContextItemsOverAll: Context) {
         fab.setOnClickListener {
             val builder = AlertDialog.Builder(fab.context)
             builder.setTitle("Add task")
@@ -60,8 +63,12 @@ class OnClick(private val imageView: ImageView, items: ArrayList<String>, onMenu
                 }
                 if (!overAllItems.contains(inputField.text.toString())) {
                     overAllItems.add(inputField.text.toString())
+                    OverAllList.itemsOverAll.sort()
                 }
-                DataManager.saveData(items, applicationContext)
+                DataManager.saveData(items, applicationContextItems)
+                saveOverAllList(overAllItems, applicationContextItemsOverAll)
+                //DataManager.saveDataOverAll(overAllItems, applicationContextItemsOverAll)
+                //DataManager.saveDataOverAll(overAllItems, applicationContextItemsOverAll)
                 // saveData() // Sie müssen diese Funktion definieren
                 //Toast.makeText(fab.context, "Task successfully added with the name ${inputField.text}" + "!", Toast.LENGTH_SHORT).show()
             }
@@ -103,6 +110,14 @@ class OnClick(private val imageView: ImageView, items: ArrayList<String>, onMenu
             val intent = Intent(context, OverAllList::class.java)
             context.startActivity(intent)
 
+        }
+    }
+
+    fun setToDoListClickListener(button: Button, context: Context) {
+        button.setOnClickListener {
+            val intent = Intent(context, MainActivity::class.java)
+            context.startActivity(intent)
+            OverAllList.itemAdapter.notifyDataSetChanged()
         }
     }
 }

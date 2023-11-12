@@ -23,6 +23,7 @@ class MainActivity : AppCompatActivity() {
 
     companion object {
         lateinit var itemAdapter: ArrayAdapter<String>
+        lateinit var items: ArrayList<String>
     }
 
     private lateinit var binding: ActivityMainBinding
@@ -33,7 +34,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var imageView: ImageView
     private lateinit var buttonEditName: Button
     private lateinit var buttonOverallList: Button
-    private lateinit var items: ArrayList<String>
+
 
     @SuppressLint("ResourceType")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -89,13 +90,9 @@ class MainActivity : AppCompatActivity() {
             items.add(string)
         }
 
-        /*val element = findViewById<View>(R.id.action_listview)
-        fun showPopupMenu(view: View) {
-            val popupMenu = PopupMenu(this, view)
-            popupMenu.menuInflater.inflate(R.menu.menu_main, popupMenu.menu)
-        }*/
+        val onClick = OnClick()
 
-        val onClick = OnClick(imageView, items) { itemId ->
+        onClick.menuClick(imageView, items) { itemId ->
             when (itemId) {
                 R.id.action_add -> {
                     Toast.makeText(this, "Action was pressed!!!", Toast.LENGTH_SHORT).show()
@@ -115,8 +112,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-
-        onClick.setFabClickListener(fab, items, this, OverAllList.itemsOverAll)
+        onClick.setFabClickListener(fab, items, this, OverAllList.itemsOverAll, this)
         onClick.setEditButtonClickListener(buttonEditName, this, textView)
         onClick.setOverallListButtonClickListener(buttonOverallList, this)
     }

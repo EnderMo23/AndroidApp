@@ -5,27 +5,45 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.text.InputType
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
-import android.widget.PopupMenu
 import android.widget.TextView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.navigation.NavigationView
 import com.sirmo.androidapp.MainActivity
 import com.sirmo.androidapp.OverAllList
 import com.sirmo.androidapp.R
 import com.sirmo.androidapp.manager.DataManager
 
 class OnClick {
-    fun menuClick(imageView: ImageView, items: ArrayList<String>, onMenuItemClicked: (itemId: Int) -> Unit) {
+    fun menuClick(navigationView: NavigationView, imageView: ImageView, context: Context, items: ArrayList<String>, onMenuItemClicked: (itemId: Int) -> Unit) {
         imageView.setOnClickListener {
-            val popupMenu = PopupMenu(it.context, it)
+
+            navigationView.visibility = View.VISIBLE
+
+            navigationView.menu.findItem(R.id.action_add)?.isVisible = true
+            navigationView.menu.findItem(R.id.action_remove)?.isVisible = true
+            navigationView.menu.findItem(R.id.action_listview)?.isVisible = true
+
+            navigationView.setNavigationItemSelectedListener { menuItem ->
+                onMenuItemClicked(menuItem.itemId)
+                navigationView.visibility = View.INVISIBLE
+                true
+            }
+
+            /*val transition = androidx.transition.TransitionInflater.from(context)
+                .inflateTransition(R.anim.slide_in)
+            TransitionManager.beginDelayedTransition(MainActivity.rootLayout, transition)*/
+
+            /*val popupMenu = PopupMenu(it.context, it)
             popupMenu.menuInflater.inflate(R.menu.menu_supermarkets, popupMenu.menu)
             popupMenu.setOnMenuItemClickListener { item ->
                 onMenuItemClicked(item.itemId)
                 true
             }
-            popupMenu.show()
+            popupMenu.show()*/
 
             /*val i2 = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/watch?v=xvFZjo5PgG0"))
             imageView.context.startActivity(i2)*/

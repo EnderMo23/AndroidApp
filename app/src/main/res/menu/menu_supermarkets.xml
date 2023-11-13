@@ -3,6 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/action_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:orderInCategory="100"
         android:title="Add new List"
         app:showAsAction="always" />
@@ -15,5 +17,10 @@
         android:id="@+id/action_listview"
         android:orderInCategory="200"
         android:title="Your lists"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_back"
+        android:orderInCategory="200"
+        android:title="Back"
         app:showAsAction="ifRoom" />
 </menu>

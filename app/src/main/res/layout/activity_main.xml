@@ -71,7 +71,8 @@
         android:background="#000000"
         android:contentDescription="Info"
         android:foregroundGravity="center"
-        app:srcCompat="@mipmap/to_do_shopping_list_original_xxxhdpi" />
+        app:srcCompat="@mipmap/to_do_shopping_list_original_xxxhdpi"
+        android:layout_centerInParent="true"/>
 
     <Button
         android:id="@+id/buttonEditName"
@@ -86,5 +87,13 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center|top"
         android:text="OverallList" />
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/navView"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:visibility="invisible"
+        app:menu="@menu/menu_supermarkets"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

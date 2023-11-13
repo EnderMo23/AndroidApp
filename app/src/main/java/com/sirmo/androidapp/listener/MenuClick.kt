@@ -2,10 +2,15 @@ package com.sirmo.androidapp.listener
 
 import android.app.AlertDialog
 import android.content.Context
-import android.graphics.Color
 import android.text.InputType
+import android.view.View
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
+import com.google.android.material.navigation.NavigationView
+import com.sirmo.androidapp.MainActivity
+import com.sirmo.androidapp.R
 import com.sirmo.androidapp.manager.DataManager
 
 class MenuClick {
@@ -24,7 +29,7 @@ class MenuClick {
             val inputField = EditText(context)
             inputField.hint = "New task name"
             inputField.inputType = InputType.TYPE_CLASS_TEXT
-            inputField.setTextColor((Color.GREEN))
+            inputField.setTextColor((android.graphics.Color.GREEN))
             builder.setView(inputField)
 
             builder.setPositiveButton("OK") { _, _ ->
@@ -46,6 +51,36 @@ class MenuClick {
 
         fun setMenuRemoveClickListener(items: ArrayList<String>) {
             items.clear()
+        }
+
+        fun menuClickItemId(navigationView: NavigationView, imageView: ImageView, items: ArrayList<String>, textView: TextView, context: Context) {
+            val onClick = OnClick()
+            onClick.menuClick(navigationView, imageView, context, items) { itemId ->
+                when (itemId) {
+                    R.id.action_add -> {
+                        Toast.makeText(context, "Action was pressed!!!", Toast.LENGTH_SHORT).show()
+                        println("Action")
+                        setMenuAddClickListener(context, MainActivity.items, textView)
+                    }
+
+                    R.id.action_remove -> {
+                        println("Remove")
+                        setMenuRemoveClickListener(MainActivity.items)
+                        MainActivity.itemAdapter.notifyDataSetChanged()
+                    }
+
+                    R.id.action_listview -> {
+                        println("List View")
+                        DataManager.loadData(context, MainActivity.items)
+                        MainActivity.itemAdapter.notifyDataSetChanged()
+                    }
+
+                    R.id.action_back -> {
+                        println("Back")
+                        navigationView.visibility = View.INVISIBLE
+                    }
+                }
+            }
         }
     }
 }

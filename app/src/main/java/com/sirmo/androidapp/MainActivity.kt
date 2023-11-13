@@ -13,6 +13,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.navigation.NavigationView
 import com.sirmo.androidapp.databinding.ActivityMainBinding
 import com.sirmo.androidapp.listener.MenuClick
 import com.sirmo.androidapp.listener.OnClick
@@ -24,19 +25,22 @@ class MainActivity : AppCompatActivity() {
     companion object {
         lateinit var itemAdapter: ArrayAdapter<String>
         lateinit var items: ArrayList<String>
+        /*@SuppressLint("StaticFieldLeak")
+        lateinit var rootLayout: ViewGroup
+        lateinit var drawerLayout: DrawerLayout*/
     }
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var lvToDoList: ListView
     private lateinit var fab: FloatingActionButton
-    private lateinit var textView: TextView
     private lateinit var textViewHeading: TextView
+    private lateinit var textViewSubHeading: TextView
     private lateinit var imageView: ImageView
     private lateinit var buttonEditName: Button
     private lateinit var buttonOverallList: Button
+    private lateinit var navigationView: NavigationView
 
-
-    @SuppressLint("ResourceType")
+    @SuppressLint("ResourceType", "ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -52,13 +56,15 @@ class MainActivity : AppCompatActivity() {
         }*/
 
         imageView = findViewById(R.id.imageView2)
-        textView = findViewById(R.id.heading)
-        textViewHeading = findViewById(R.id.subheading)
+        textViewHeading = findViewById(R.id.heading)
+        textViewSubHeading = findViewById(R.id.subheading)
         lvToDoList = findViewById(R.id.lvToDoList)
         fab = findViewById(R.id.floatingActionButton2)
         buttonEditName = findViewById(R.id.buttonEditName)
         buttonOverallList = findViewById(R.id.buttonOverallList)
+        navigationView = findViewById(R.id.navView)
         items = ArrayList()
+        //rootLayout = findViewById(android.R.id.content)
 
         DataManager.loadData(this, items)
 
@@ -80,11 +86,11 @@ class MainActivity : AppCompatActivity() {
         fab.rippleColor = colors.colorGreen
         fab.setColorFilter(colors.colorWhiteLight)
 
-        textView.paintFlags = Paint.UNDERLINE_TEXT_FLAG
-        textView.setTextColor(Color.WHITE) //colorGreenDark
-
         textViewHeading.paintFlags = Paint.UNDERLINE_TEXT_FLAG
-        textViewHeading.setTextColor(colors.colorWhiteLight) //colorGreen
+        textViewHeading.setTextColor(Color.WHITE) //colorGreenDark
+
+        textViewSubHeading.paintFlags = Paint.UNDERLINE_TEXT_FLAG
+        textViewSubHeading.setTextColor(colors.colorWhiteLight) //colorGreen
 
         fun test(string: String) {
             items.add(string)
@@ -92,31 +98,13 @@ class MainActivity : AppCompatActivity() {
 
         val onClick = OnClick()
 
-        onClick.menuClick(imageView, items) { itemId ->
-            when (itemId) {
-                R.id.action_add -> {
-                    Toast.makeText(this, "Action was pressed!!!", Toast.LENGTH_SHORT).show()
-                    println("Action")
-                    MenuClick.setMenuAddClickListener(this, items, textView)
-                }
+        MenuClick.menuClickItemId(navigationView, imageView, items, textViewHeading, this)
 
-                R.id.action_remove -> {
-                    println("Remove")
-                    MenuClick.setMenuRemoveClickListener(items)
-                    itemAdapter.notifyDataSetChanged()
-                }
-
-                R.id.action_listview -> {
-                    println("Action List View")
-                    DataManager.loadData(this, items)
-                    itemAdapter.notifyDataSetChanged()
-                }
-            }
-        }
         onClick.setFabClickListener(fab, items, this, OverAllList.itemsOverAll, this)
-        onClick.setEditButtonClickListener(buttonEditName, this, textView)
+        onClick.setEditButtonClickListener(buttonEditName, this, textViewHeading)
         onClick.setOverallListButtonClickListener(buttonOverallList, this)
     }
 }
+
 
 

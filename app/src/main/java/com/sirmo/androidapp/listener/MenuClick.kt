@@ -60,23 +60,27 @@ class MenuClick {
                     R.id.action_add -> {
                         Toast.makeText(context, "Action was pressed!!!", Toast.LENGTH_SHORT).show()
                         println("Action")
+                        navigationView.startAnimation(OnClick.slideOutAnimation)
                         setMenuAddClickListener(context, MainActivity.items, textView)
                     }
 
                     R.id.action_remove -> {
                         println("Remove")
                         setMenuRemoveClickListener(MainActivity.items)
+                        navigationView.startAnimation(OnClick.slideOutAnimation)
                         MainActivity.itemAdapter.notifyDataSetChanged()
                     }
 
                     R.id.action_listview -> {
                         println("List View")
                         DataManager.loadData(context, MainActivity.items)
+                        navigationView.startAnimation(OnClick.slideOutAnimation)
                         MainActivity.itemAdapter.notifyDataSetChanged()
                     }
 
                     R.id.action_back -> {
                         println("Back")
+                        navigationView.startAnimation(OnClick.slideOutAnimation)
                         navigationView.visibility = View.INVISIBLE
                     }
                 }

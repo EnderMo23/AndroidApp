@@ -2,6 +2,7 @@ package com.sirmo.androidapp.manager
 
 import android.content.Context
 import android.util.Log
+import android.widget.TextView
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
@@ -22,6 +23,54 @@ object DataManager {
             }
         } else {
             Log.w("saveData", "Keine Daten zum Speichern vorhanden")
+        }
+    }
+
+    private fun extractTitleText(title: TextView): String {
+        return title.text.toString().trim()
+    }
+
+    fun saveTitle(title: TextView, applicationContext: Context) {
+        val titleText = extractTitleText(title)
+
+        if (titleText.isNotBlank()) {
+            Log.i("saveData", "Titel vor dem Speichern: $titleText")
+
+            val sharedPref = applicationContext.getSharedPreferences("MeineEinstellungen", Context.MODE_PRIVATE)
+            val editor = sharedPref.edit()
+
+            // Jetzt speicherst du nur den extrahierten Text
+            editor.putString("MeinTitel", titleText)
+
+            val success = editor.commit()
+            if (success) {
+                Log.i("saveData", "Titel erfolgreich gespeichert")
+            } else {
+                Log.e("saveData", "Fehler beim Speichern des Titels")
+            }
+        } else {
+            Log.w("saveData", "Kein gültiger Titel zum Speichern vorhanden")
+        }
+    }
+
+    fun loadTitle(titleTextView: TextView, applicationContext: Context) {
+        val sharedPref = applicationContext.getSharedPreferences("MeineEinstellungen", Context.MODE_PRIVATE)
+
+        // Den gespeicherten String abrufen
+        val json = sharedPref.getString("MeinTitel", null)
+
+        if (json != null) {
+            val gson = Gson()
+
+            // Den gespeicherten String in den ursprünglichen Text umwandeln
+            val loadedTitle = gson.fromJson(json, String::class.java)
+
+            // Den geladenen Titel in den TextView setzen
+            titleTextView.text = loadedTitle
+
+            Log.i("loadData", "Titel erfolgreich geladen: $loadedTitle")
+        } else {
+            Log.w("loadData", "Kein gespeicherter Titel vorhanden")
         }
     }
 

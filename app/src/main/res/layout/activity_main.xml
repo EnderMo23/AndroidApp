@@ -94,6 +94,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:visibility="invisible"
-        app:menu="@menu/menu_supermarkets"/>
+        app:menu="@menu/menu_supermarkets"
+        tools:visibility="invisible" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

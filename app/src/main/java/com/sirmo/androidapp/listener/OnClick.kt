@@ -114,6 +114,7 @@ class OnClick {
 
             builder.setPositiveButton("OK") { _, _ ->
                 textView.text = inputField.text.toString()
+                DataManager.saveTitle(textView, context)
                 // saveData() // Sie müssen diese Funktion definieren
                 //Toast.makeText(fab.context, "Task successfully added with the name ${inputField.text}" + "!", Toast.LENGTH_SHORT).show()
             }

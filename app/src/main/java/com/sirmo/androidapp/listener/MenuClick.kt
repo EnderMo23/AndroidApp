@@ -2,6 +2,7 @@ package com.sirmo.androidapp.listener
 
 import android.app.AlertDialog
 import android.content.Context
+import android.content.Intent
 import android.text.InputType
 import android.view.View
 import android.widget.EditText
@@ -9,6 +10,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import com.google.android.material.navigation.NavigationView
+import com.sirmo.androidapp.ListsActivity
 import com.sirmo.androidapp.MainActivity
 import com.sirmo.androidapp.R
 import com.sirmo.androidapp.manager.DataManager
@@ -76,6 +78,9 @@ class MenuClick {
                         DataManager.loadData(context, MainActivity.items)
                         navigationView.startAnimation(OnClick.slideOutAnimation)
                         MainActivity.itemAdapter.notifyDataSetChanged()
+                        val intent = Intent(context, ListsActivity::class.java)
+                        context.startActivity(intent)
+
                     }
 
                     R.id.action_back -> {

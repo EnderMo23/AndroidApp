@@ -26,13 +26,12 @@ class MainActivity : AppCompatActivity() {
     companion object {
         lateinit var itemAdapter: ArrayAdapter<String>
         lateinit var items: ArrayList<String>
-        lateinit var textViewHeading: TextView
     }
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var rootView: ViewGroup
     private lateinit var fab: FloatingActionButton
-
+    private lateinit var textViewHeading: TextView
     private lateinit var textViewSubHeading: TextView
     private lateinit var imageView: ImageView
     private lateinit var buttonEditName: Button
@@ -62,7 +61,7 @@ class MainActivity : AppCompatActivity() {
         navigationView = findViewById(R.id.navView)
         items = ArrayList()
 
-        DataManager.loadData(this, items)
+        DataManager.loadData(this, items, "MeinSchlüssel")
         DataManager.loadTitle(textViewHeading, this)
         navigationView.visibility = View.INVISIBLE
 
@@ -75,10 +74,10 @@ class MainActivity : AppCompatActivity() {
         fab.setColorFilter(colors.colorWhiteLight)
 
         textViewHeading.paintFlags = Paint.UNDERLINE_TEXT_FLAG
-        textViewHeading.setTextColor(Color.WHITE) //colorGreenDark
+        textViewHeading.setTextColor(Color.WHITE)
 
         textViewSubHeading.paintFlags = Paint.UNDERLINE_TEXT_FLAG
-        textViewSubHeading.setTextColor(colors.colorWhiteLight) //colorGreen
+        textViewSubHeading.setTextColor(colors.colorWhiteLight)
 
         fun test(string: String) {
             items.add(string)

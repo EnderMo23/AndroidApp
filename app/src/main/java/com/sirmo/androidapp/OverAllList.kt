@@ -26,12 +26,9 @@ class OverAllList : AppCompatActivity() {
         lvOverAllList = findViewById(R.id.overAllList)
         toToDoListButton = findViewById(R.id.toToDoListButton)
 
-        DataManager.loadDataOverAll(this, itemsOverAll)
+        DataManager.loadData(this, itemsOverAll, "MeinSchlüsselOverAll")
 
         itemsOverAll.sort()
-
-        /*lvOverAllList = findViewById(R.id.overAllList)
-        lvOverAllList.adapter = MainActivity.itemAdapter*/
 
         itemAdapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, itemsOverAll)
         lvOverAllList.adapter = itemAdapter

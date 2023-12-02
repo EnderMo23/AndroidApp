@@ -23,7 +23,7 @@ class MenuClick {
         }
         fun setMenuAddClickListener(context: Context, items: ArrayList<String>, textView: TextView) {
             println("Add was pressed!!!!!!!!!!")
-            DataManager.saveData(items, context)
+            DataManager.saveData(items, context, "MeinSchlüssel")
             val builder = AlertDialog.Builder(context)
             builder.setTitle("Add new List")
                 .setIcon(android.R.drawable.ic_input_add)
@@ -42,6 +42,15 @@ class MenuClick {
                 //items.add(inputField.text.toString())
                 createNewList(items, context)
                 textView.text = inputField.text.toString()
+
+                if (inputField.text.toString().isNotEmpty()) {
+                    //ListsActivity.items.add(inputField.text.toString())
+                    MainActivity.items.add(inputField.text.toString())
+                    val intent = Intent(context, ListsActivity::class.java)
+                    intent.putExtra("inputText", inputField.text.toString())
+                    context.startActivity(intent)
+                }
+
                 //DataManager.saveData(items, context)
             }
 
@@ -75,7 +84,7 @@ class MenuClick {
 
                     R.id.action_listview -> {
                         println("List View")
-                        DataManager.loadData(context, MainActivity.items)
+                        DataManager.loadData(context, MainActivity.items, "MeinSchlüssel")
                         navigationView.startAnimation(OnClick.slideOutAnimation)
                         MainActivity.itemAdapter.notifyDataSetChanged()
                         val intent = Intent(context, ListsActivity::class.java)

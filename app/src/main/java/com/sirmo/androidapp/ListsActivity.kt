@@ -5,6 +5,7 @@ import android.widget.ArrayAdapter
 import android.widget.ListView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.sirmo.androidapp.listener.OnClick
 import com.sirmo.androidapp.manager.DataManager
 import com.sirmo.androidapp.manager.Variables
 
@@ -25,8 +26,23 @@ class ListsActivity : AppCompatActivity() {
         items = ArrayList()
         itemAdapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, items)
         textView = findViewById(R.id.textView)
+        listView.adapter = itemAdapter
+
+        val inputTest = intent.getStringExtra("inputText")
+        val onClick = OnClick()
 
         DataManager.loadTitle(textView, this)
-        DataManager.loadData(this, items)
+        DataManager.loadData(this, items, "MeinSchlüssel")
+
+        items.add(inputTest.toString())
+
+        /*listView.onItemClickListener = AdapterView.OnItemClickListener { _, _, _, _ ->
+            //startActivity(Intent(this, MainActivity::class.java))
+            DataManager.loadData(this, items)
+        }*/
+
+        //onClick.setOnItemClickListener(listView, this)
+
+        //itemAdapter.notifyDataSetChanged()
     }
 }

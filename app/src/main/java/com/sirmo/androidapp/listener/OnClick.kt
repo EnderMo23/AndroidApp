@@ -61,7 +61,7 @@ class OnClick {
     }
 
     fun saveOverAllList(items: ArrayList<String>, context: Context) {
-        DataManager.saveDataOverAll(items, context)
+        DataManager.saveData(items, context, "MeinSchlüsselOverAll")
     }
 
     fun setFabClickListener(fab: FloatingActionButton, items: ArrayList<String>, applicationContextItems: Context, overAllItems: ArrayList<String>, applicationContextItemsOverAll: Context) {
@@ -89,7 +89,7 @@ class OnClick {
                     overAllItems.add(inputField.text.toString())
                     OverAllList.itemsOverAll.sort()
                 }
-                DataManager.saveData(items, applicationContextItems)
+                DataManager.saveData(items, applicationContextItems, "MeinSchlüssel")
                 saveOverAllList(overAllItems, applicationContextItemsOverAll)
             }
 
@@ -145,7 +145,7 @@ class OnClick {
     fun setOnItemLongClickListenerToDo(list: ListView, items: ArrayList<String>, itemAdapter: ArrayAdapter<String>, context: Context) {
         list.onItemLongClickListener = AdapterView.OnItemLongClickListener { _, _, pos, _ ->
             items.removeAt(pos)
-            DataManager.saveData(items, context)
+            DataManager.saveData(items, context, "MeinSchlüssel")
             itemAdapter.notifyDataSetChanged()
             Toast.makeText(context, "Element successfully deleted!", Toast.LENGTH_SHORT)
                 .show()
@@ -156,7 +156,7 @@ class OnClick {
     fun setOnItemLongClickListenerOverAll(list: ListView, items: ArrayList<String>, itemAdapter: ArrayAdapter<String>, context: Context) {
         list.onItemLongClickListener = AdapterView.OnItemLongClickListener { _, _, pos, _ ->
             items.removeAt(pos)
-            DataManager.saveDataOverAll(items, context)
+            DataManager.saveData(items, context, "MeinSchlüsselOverAll")
             itemAdapter.notifyDataSetChanged()
             Toast.makeText(context, "Element successfully deleted!", Toast.LENGTH_SHORT)
                 .show()
@@ -169,7 +169,7 @@ class OnClick {
             val selectedItemPos = list.getItemAtPosition(pos) as String
             MainActivity.items.add(selectedItemPos)
             MainActivity.itemAdapter.notifyDataSetChanged()
-            DataManager.saveData(MainActivity.items, context)
+            DataManager.saveData(MainActivity.items, context, "MeinSchlüssel")
         }
     }
 }

@@ -142,10 +142,10 @@ class OnClick {
         }
     }
 
-    fun setOnItemLongClickListenerToDo(list: ListView, items: ArrayList<String>, itemAdapter: ArrayAdapter<String>, context: Context) {
+    fun setOnItemLongClickListener(list: ListView, items: ArrayList<String>, itemAdapter: ArrayAdapter<String>, context: Context, customKey: String) {
         list.onItemLongClickListener = AdapterView.OnItemLongClickListener { _, _, pos, _ ->
             items.removeAt(pos)
-            DataManager.saveData(items, context, "MeinSchlüssel")
+            DataManager.saveData(items, context, customKey)
             itemAdapter.notifyDataSetChanged()
             Toast.makeText(context, "Element successfully deleted!", Toast.LENGTH_SHORT)
                 .show()
@@ -153,7 +153,7 @@ class OnClick {
         }
     }
 
-    fun setOnItemLongClickListenerOverAll(list: ListView, items: ArrayList<String>, itemAdapter: ArrayAdapter<String>, context: Context) {
+    /*fun setOnItemLongClickListenerOverAll(list: ListView, items: ArrayList<String>, itemAdapter: ArrayAdapter<String>, context: Context) {
         list.onItemLongClickListener = AdapterView.OnItemLongClickListener { _, _, pos, _ ->
             items.removeAt(pos)
             DataManager.saveData(items, context, "MeinSchlüsselOverAll")
@@ -162,7 +162,7 @@ class OnClick {
                 .show()
             true
         }
-    }
+    }*/
 
     fun setOnItemClickListener(list: ListView, context: Context) {
         list.onItemClickListener = AdapterView.OnItemClickListener { _, _, pos, _ ->

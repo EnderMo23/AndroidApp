@@ -32,17 +32,10 @@ class ListsActivity : AppCompatActivity() {
         val onClick = OnClick()
 
         DataManager.loadTitle(textView, this)
-        DataManager.loadData(this, items, "MeinSchlüssel")
+        //DataManager.loadData(this, items, "MeinSchlüssel")
 
         items.add(inputTest.toString())
 
-        /*listView.onItemClickListener = AdapterView.OnItemClickListener { _, _, _, _ ->
-            //startActivity(Intent(this, MainActivity::class.java))
-            DataManager.loadData(this, items)
-        }*/
-
-        //onClick.setOnItemClickListener(listView, this)
-
-        //itemAdapter.notifyDataSetChanged()
+        onClick.setOnItemLongClickListener(listView, items, itemAdapter, this, "MeinSchlüsselLists")
     }
 }

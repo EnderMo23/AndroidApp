@@ -35,7 +35,7 @@ class OverAllList : AppCompatActivity() {
 
         onClick.setOnItemClickListener(lvOverAllList, this)
 
-        onClick.setOnItemLongClickListenerOverAll(lvOverAllList, itemsOverAll, itemAdapter, this)
+        onClick.setOnItemLongClickListener(lvOverAllList, itemsOverAll, itemAdapter, this, "MeinSchlüsselOverAll")
 
 
         onClick.setToDoListClickListener(toToDoListButton, this)

@@ -68,7 +68,7 @@ class MainActivity : AppCompatActivity() {
         itemAdapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, items)
         lvToDoList.adapter = itemAdapter
 
-        onClick.setOnItemLongClickListenerToDo(lvToDoList, items, itemAdapter,this)
+        onClick.setOnItemLongClickListener(lvToDoList, items, itemAdapter,this, "MeinSchlüssel")
 
         fab.rippleColor = colors.colorGreen
         fab.setColorFilter(colors.colorWhiteLight)

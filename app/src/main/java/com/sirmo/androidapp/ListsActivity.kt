@@ -28,6 +28,8 @@ class ListsActivity : AppCompatActivity() {
         textView = findViewById(R.id.textView)
         listView.adapter = itemAdapter
 
+        DataManager.loadData(this, items, "MeinSchlüsselLists")
+
         val inputTest = intent.getStringExtra("inputText")
         val onClick = OnClick()
 
@@ -35,6 +37,10 @@ class ListsActivity : AppCompatActivity() {
         //DataManager.loadData(this, items, "MeinSchlüssel")
 
         items.add(inputTest.toString())
+        items.removeAll { it == "null" }
+        DataManager.saveData(items, this, "MeinSchlüsselLists")
+
+        onClick.setOnItemClickListener(listView, this)
 
         onClick.setOnItemLongClickListener(listView, items, itemAdapter, this, "MeinSchlüsselLists")
     }

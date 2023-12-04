@@ -167,8 +167,10 @@ class OnClick {
     fun setOnItemClickListener(list: ListView, context: Context) {
         list.onItemClickListener = AdapterView.OnItemClickListener { _, _, pos, _ ->
             val selectedItemPos = list.getItemAtPosition(pos) as String
-            MainActivity.items.add(selectedItemPos)
+            DataManager.loadData(context, MainActivity.items, "MeinSchlüsselOverAll")
+            //MainActivity.items.add(selectedItemPos)
             MainActivity.itemAdapter.notifyDataSetChanged()
+            context.startActivity(Intent(context, MainActivity::class.java))
             DataManager.saveData(MainActivity.items, context, "MeinSchlüssel")
         }
     }

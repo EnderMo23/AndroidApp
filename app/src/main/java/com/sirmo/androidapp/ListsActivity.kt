@@ -40,7 +40,7 @@ class ListsActivity : AppCompatActivity() {
         items.removeAll { it == "null" }
         DataManager.saveData(items, this, "MeinSchlüsselLists")
 
-        onClick.setOnItemClickListener(listView, this)
+        onClick.setOnItemClickListenerLists(listView, this)
 
         onClick.setOnItemLongClickListener(listView, items, itemAdapter, this, "MeinSchlüsselLists")
     }

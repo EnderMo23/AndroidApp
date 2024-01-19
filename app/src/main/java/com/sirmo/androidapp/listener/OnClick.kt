@@ -177,8 +177,9 @@ class OnClick {
 
     fun setOnItemClickListenerLists(list: ListView, context: Context) {
         list.onItemClickListener = AdapterView.OnItemClickListener { _, _, pos, _ ->
+            //val key = MenuClick.newKey
             val selectedItemPos = list.getItemAtPosition(pos) as String
-            DataManager.loadData(context, MainActivity.items, "MeinSchlüsselOverAll")
+            DataManager.loadData(context, MainActivity.items, "MeinSchlüsselOverAll")//"MeinSchlüsselOverAll"
             //MainActivity.items.add(selectedItemPos)
             MainActivity.itemAdapter.notifyDataSetChanged()
             context.startActivity(Intent(context, MainActivity::class.java))

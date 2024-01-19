@@ -14,16 +14,19 @@ import com.sirmo.androidapp.ListsActivity
 import com.sirmo.androidapp.MainActivity
 import com.sirmo.androidapp.R
 import com.sirmo.androidapp.manager.DataManager
+import com.sirmo.androidapp.manager.ListManager
 
 class MenuClick {
     companion object {
-        private fun createNewList(items: ArrayList<String>, context: Context) {
+        var i = 0
+        val randomKey = DataManager.createKey(5)
+        private fun createNewList(items: ArrayList<String>) {
             items.clear()
             //DataManager.saveData(items, context)
         }
-        fun setMenuAddClickListener(context: Context, items: ArrayList<String>, textView: TextView) {
+        private fun setMenuAddClickListener(context: Context, items: ArrayList<String>, textView: TextView) {
             println("Add was pressed!!!!!!!!!!")
-            DataManager.saveData(items, context, "MeinSchlüssel")
+            //saveData
             val builder = AlertDialog.Builder(context)
             builder.setTitle("Add new List")
                 .setIcon(android.R.drawable.ic_input_add)
@@ -40,7 +43,7 @@ class MenuClick {
                 }
                 println("New list was created with the name ${inputField.text}!!!")
                 //items.add(inputField.text.toString())
-                createNewList(items, context)
+                createNewList(items)
                 textView.text = inputField.text.toString()
 
                 if (inputField.text.toString().isNotEmpty()) {
@@ -48,6 +51,11 @@ class MenuClick {
                     MainActivity.items.add(inputField.text.toString())
                     val intent = Intent(context, ListsActivity::class.java)
                     intent.putExtra("inputText", inputField.text.toString())
+                    //random
+                    var saveList = DataManager.saveData(items, context, randomKey).toString() //${i} "MeinSchlüssel"
+                    ListManager.lists.add(saveList)
+                    println(ListManager.lists)
+                    //i ++
                     context.startActivity(intent)
                 }
 
@@ -60,7 +68,7 @@ class MenuClick {
             builder.show()
         }
 
-        fun setMenuRemoveClickListener(items: ArrayList<String>) {
+        private fun setMenuRemoveClickListener(items: ArrayList<String>) {
             items.clear()
         }
 

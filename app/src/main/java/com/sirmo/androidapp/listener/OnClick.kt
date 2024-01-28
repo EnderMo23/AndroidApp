@@ -186,6 +186,14 @@ class OnClick {
             DataManager.saveData(MainActivity.items, context, "MeinSchlüssel")
         }
     }
+
+    fun setClearClickListener(button: Button, items: ArrayList<String>, context: Context) {
+        button.setOnClickListener {
+            items.clear()
+            MainActivity.itemAdapter.notifyDataSetChanged()
+            DataManager.saveData(items, context, "MeinSchlüsselll")
+        }
+    }
 }
 
 

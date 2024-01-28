@@ -38,6 +38,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var buttonOverallList: Button
     private lateinit var navigationView: NavigationView
     private lateinit var lvToDoList: ListView
+    private lateinit var clearButton: Button
 
     @SuppressLint("ResourceType", "ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -60,6 +61,7 @@ class MainActivity : AppCompatActivity() {
         buttonOverallList = findViewById(R.id.buttonOverallList)
         navigationView = findViewById(R.id.navView)
         items = ArrayList()
+        clearButton = findViewById(R.id.clearButton)
 
         DataManager.loadData(this, items, "MeinSchlüssel")
         DataManager.loadTitle(textViewHeading, this)
@@ -82,6 +84,8 @@ class MainActivity : AppCompatActivity() {
         fun test(string: String) {
             items.add(string)
         }
+
+        test("asd")
 
         /*fun isTouchInsideView(event: MotionEvent, view: View): Boolean {
             val location = IntArray(2)
@@ -113,5 +117,6 @@ class MainActivity : AppCompatActivity() {
         onClick.setFabClickListener(fab, items, this, OverAllList.itemsOverAll, this)
         onClick.setEditButtonClickListener(buttonEditName, this, textViewHeading)
         onClick.setOverallListButtonClickListener(buttonOverallList, this)
+        onClick.setClearClickListener(clearButton, items, this)
     }
 }

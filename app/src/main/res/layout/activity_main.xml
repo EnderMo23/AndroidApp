@@ -41,6 +41,13 @@
             android:textScaleX="1.5"
             android:textStyle="bold" />
 
+        <Button
+            android:id="@+id/clearButton"
+            android:layout_width="132dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:text="Clear all" />
+
         <TextView
             android:id="@+id/subheading"
             android:layout_width="match_parent"

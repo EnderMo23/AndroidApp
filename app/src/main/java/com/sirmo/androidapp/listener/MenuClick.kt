@@ -52,8 +52,8 @@ class MenuClick {
                     val intent = Intent(context, ListsActivity::class.java)
                     intent.putExtra("inputText", inputField.text.toString())
                     //random
-                    var saveList = DataManager.saveData(items, context, randomKey).toString() //${i} "MeinSchlüssel"
-                    ListManager.lists.add(saveList)
+                    //var saveList = DataManager.saveData(items, context, randomKey).toString() //${i} "MeinSchlüssel"
+                    ListManager.lists.add(items.toString())
                     println(ListManager.lists)
                     //i ++
                     context.startActivity(intent)

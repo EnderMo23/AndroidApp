@@ -190,8 +190,9 @@ class OnClick {
     fun setClearClickListener(button: Button, items: ArrayList<String>, context: Context) {
         button.setOnClickListener {
             items.clear()
+            items.add("Leere Liste")
             MainActivity.itemAdapter.notifyDataSetChanged()
-            DataManager.saveData(items, context, "MeinSchlüsselll")
+            DataManager.saveData(items, context, "MeinSchlüssel")
         }
     }
 }
